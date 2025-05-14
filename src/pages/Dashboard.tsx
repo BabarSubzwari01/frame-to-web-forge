@@ -2,7 +2,7 @@
 import React from 'react';
 import Layout from '@/components/layout/Layout';
 import StatCard from '@/components/ui/stat-card';
-import { Model, Database, Edit } from 'lucide-react';
+import { Package, Database, Edit } from 'lucide-react';
 
 const Dashboard = () => {
   const recentModels = [
@@ -21,7 +21,7 @@ const Dashboard = () => {
         <StatCard 
           title="Active Models" 
           value="24" 
-          icon={<Model className="h-6 w-6" />} 
+          icon={<Package className="h-6 w-6" />} 
         />
         
         <StatCard 
@@ -44,7 +44,7 @@ const Dashboard = () => {
             {recentModels.map((model, index) => (
               <div key={index} className="flex items-center justify-between py-2">
                 <div className="flex items-center gap-3">
-                  <Model className="w-5 h-5 text-gray-500" />
+                  <Package className="w-5 h-5 text-gray-500" />
                   <span>{model.name}</span>
                 </div>
                 <span className="text-sm text-gray-500">{model.updatedAt}</span>

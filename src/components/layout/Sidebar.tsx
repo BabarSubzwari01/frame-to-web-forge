@@ -1,15 +1,15 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Dashboard, Database, Settings, Model } from 'lucide-react';
+import { LayoutDashboard, Database, Settings, Package } from 'lucide-react';
 import { cn } from "@/lib/utils";
 
 const Sidebar = () => {
   const location = useLocation();
   
   const navItems = [
-    { name: 'Dashboard', path: '/', icon: Dashboard },
-    { name: 'Models', path: '/models', icon: Model },
+    { name: 'Dashboard', path: '/', icon: LayoutDashboard },
+    { name: 'Models', path: '/models', icon: Package },
     { name: 'Datasets', path: '/datasets', icon: Database },
     { name: 'Settings', path: '/settings', icon: Settings },
   ];
