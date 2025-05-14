@@ -1,23 +1,32 @@
 
-import React from 'react';
-import { cn } from '@/lib/utils';
+import React, { ReactNode } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
 
 interface StatCardProps {
   title: string;
-  value: string | number;
-  icon?: React.ReactNode;
-  className?: string;
+  value: string;
+  icon: ReactNode;
 }
 
-const StatCard = ({ title, value, icon, className }: StatCardProps) => {
+const StatCard = ({
+  title,
+  value,
+  icon
+}: StatCardProps) => {
   return (
-    <div className={cn("p-6 rounded-md bg-white shadow-sm", className)}>
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-medium text-gray-700">{title}</h3>
-        {icon && <div>{icon}</div>}
-      </div>
-      <p className="mt-2 text-3xl font-semibold">{value}</p>
-    </div>
+    <Card className="testbed-card">
+      <CardContent className="p-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm text-gray-500">{title}</p>
+            <h3 className="text-2xl font-bold mt-1">{value}</h3>
+          </div>
+          <div className="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center text-primary">
+            {icon}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 

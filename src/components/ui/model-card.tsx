@@ -1,5 +1,8 @@
 
 import React from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Switch } from '@/components/ui/switch';
 
 interface ModelCardProps {
   title: string;
@@ -7,52 +10,48 @@ interface ModelCardProps {
   accuracy: string;
   requests: string;
   lastUpdated: string;
-  isActive?: boolean;
+  isActive: boolean;
 }
 
-const ModelCard = ({ 
-  title, 
-  version, 
-  accuracy, 
-  requests, 
-  lastUpdated, 
-  isActive = true 
+const ModelCard = ({
+  title,
+  version,
+  accuracy,
+  requests,
+  lastUpdated,
+  isActive
 }: ModelCardProps) => {
   return (
-    <div className="p-6 border rounded-md bg-white">
-      <div className="flex justify-between items-start mb-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <h3 className="text-lg font-medium">{title}</h3>
-            <span className="text-sm text-gray-500">{version}</span>
+    <Card className="testbed-card">
+      <CardHeader className="pb-2">
+        <div className="flex justify-between items-center">
+          <CardTitle className="text-lg">{title}</CardTitle>
+          <Badge variant={isActive ? "default" : "outline"}>
+            {isActive ? "Active" : "Inactive"}
+          </Badge>
+        </div>
+        <div className="text-sm text-gray-500">{version}</div>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <span className="text-sm text-gray-500">Accuracy</span>
+            <span className="font-medium">{accuracy}</span>
           </div>
-          <div className="flex items-center mt-1">
-            <span className={`px-2 py-0.5 rounded-full text-xs ${isActive ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
-              {isActive ? 'Active' : 'Inactive'}
-            </span>
+          <div className="flex justify-between">
+            <span className="text-sm text-gray-500">Requests</span>
+            <span className="font-medium">{requests}</span>
           </div>
         </div>
-      </div>
-      
-      <div className="grid grid-cols-3 gap-4 mb-4">
-        <div>
-          <p className="text-sm text-gray-500 mb-1">Accuracy</p>
-          <p className="font-medium">{accuracy}</p>
+      </CardContent>
+      <CardFooter className="border-t pt-4 flex justify-between">
+        <span className="text-sm text-gray-500">Updated {lastUpdated}</span>
+        <div className="flex items-center gap-2">
+          <span className="text-sm">{isActive ? "On" : "Off"}</span>
+          <Switch checked={isActive} />
         </div>
-        <div>
-          <p className="text-sm text-gray-500 mb-1">Requests</p>
-          <p className="font-medium">{requests}</p>
-        </div>
-        <div>
-          <p className="text-sm text-gray-500 mb-1">Last Updated</p>
-          <p className="font-medium">{lastUpdated}</p>
-        </div>
-      </div>
-      
-      <button className="w-full py-2 px-4 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors">
-        View Details
-      </button>
-    </div>
+      </CardFooter>
+    </Card>
   );
 };
 
