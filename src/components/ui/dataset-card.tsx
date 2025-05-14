@@ -10,6 +10,8 @@ interface DatasetCardProps {
   size: string;
   lastUpdated: string;
   tags: string[];
+  isActive?: boolean;
+  onClick?: () => void;
 }
 
 const DatasetCard = ({
@@ -17,13 +19,20 @@ const DatasetCard = ({
   description,
   size,
   lastUpdated,
-  tags
+  tags,
+  isActive = false,
+  onClick
 }: DatasetCardProps) => {
   return (
-    <Card className="testbed-card">
+    <Card className="testbed-card cursor-pointer" onClick={onClick}>
       <CardHeader className="flex flex-row items-start space-y-0 pb-2">
         <div className="flex-1">
-          <CardTitle className="text-lg">{title}</CardTitle>
+          <div className="flex items-center gap-2">
+            <CardTitle className="text-lg">{title}</CardTitle>
+            {isActive && (
+              <Badge variant="default" className="ml-2">Active</Badge>
+            )}
+          </div>
           <p className="text-sm text-gray-500 mt-1">{description}</p>
         </div>
         <div className="w-10 h-10 bg-gray-100 rounded-md flex items-center justify-center">

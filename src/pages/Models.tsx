@@ -24,7 +24,8 @@ const Models = () => {
       accuracy: '92.2%',
       requests: '500K',
       lastUpdated: '1h ago',
-      isActive: true
+      isActive: true,
+      dataset: 'MNIST Image Classification'
     },
     {
       title: 'Image Classification',
@@ -32,7 +33,8 @@ const Models = () => {
       accuracy: '98.5%',
       requests: '1.2M',
       lastUpdated: '2h ago',
-      isActive: true
+      isActive: true,
+      dataset: 'MNIST Image Classification'
     },
     {
       title: 'Text Generation',
@@ -40,7 +42,8 @@ const Models = () => {
       accuracy: '96.2%',
       requests: '800K',
       lastUpdated: '1d ago',
-      isActive: false
+      isActive: false,
+      dataset: 'NIH Chest X-ray'
     },
     {
       title: 'Object Detection',
@@ -48,7 +51,8 @@ const Models = () => {
       accuracy: '94.8%',
       requests: '500K',
       lastUpdated: '3d ago',
-      isActive: false
+      isActive: false,
+      dataset: 'Kaggle Heart Disease'
     }
   ]);
   
@@ -82,12 +86,12 @@ const Models = () => {
     {
       name: "CNN",
       icon: <Cpu className="h-4 w-4 mr-2" />,
-      datasets: ["Medical MNIST", "NIH", "Kaggle Heart Disease"]
+      datasets: ["MNIST Image Classification", "NIH Chest X-ray", "Kaggle Heart Disease"]
     },
     {
       name: "QCNN",
       icon: <Atom className="h-4 w-4 mr-2" />,
-      datasets: ["Medical MNIST", "NIH", "Kaggle Heart Disease"]
+      datasets: ["MNIST Image Classification", "NIH Chest X-ray", "Kaggle Heart Disease"]
     }
   ];
 
@@ -128,11 +132,11 @@ const Models = () => {
             <DropdownMenuLabel className="font-normal text-xs text-gray-500 py-1">Available Datasets</DropdownMenuLabel>
             <DropdownMenuItem>
               <FileImage className="h-4 w-4 mr-2" />
-              <span>Medical MNIST</span>
+              <span>MNIST Image Classification</span>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <FileImage className="h-4 w-4 mr-2" />
-              <span>NIH</span>
+              <span>NIH Chest X-ray</span>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <FileImage className="h-4 w-4 mr-2" />
