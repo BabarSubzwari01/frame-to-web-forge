@@ -1,9 +1,11 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '@/components/layout/Layout';
 import ModelCard from '@/components/ui/model-card';
 import { Button } from '@/components/ui/button';
-import { Plus, FileImage, Cpu, Atom } from 'lucide-react';
+import { Plus, FileImage, Cpu, Atom, Search } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { toast } from '@/hooks/use-toast';
 import { 
   DropdownMenu,
   DropdownMenuContent,
@@ -15,7 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const Models = () => {
-  const models = [
+  const [modelsList, setModelsList] = useState([
     {
       title: 'Medical MNIST Image Classification',
       version: 'v2.1.0',
@@ -38,7 +40,7 @@ const Models = () => {
       accuracy: '96.2%',
       requests: '800K',
       lastUpdated: '1d ago',
-      isActive: true
+      isActive: false
     },
     {
       title: 'Object Detection',
@@ -46,9 +48,35 @@ const Models = () => {
       accuracy: '94.8%',
       requests: '500K',
       lastUpdated: '3d ago',
-      isActive: true
+      isActive: false
     }
-  ];
+  ]);
+  
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleToggleActive = (index: number) => {
+    const newModels = [...modelsList];
+    newModels[index].isActive = !newModels[index].isActive;
+    setModelsList(newModels);
+    
+    const message = newModels[index].isActive 
+      ? `${newModels[index].title} is now active`
+      : `${newModels[index].title} is now inactive`;
+      
+    toast({
+      title: "Model Status Changed",
+      description: message,
+      duration: 3000
+    });
+  };
+
+  const filteredModels = modelsList.filter(model => 
+    model.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const modelTypes = [
     {
@@ -114,8 +142,19 @@ const Models = () => {
         </DropdownMenu>
       </div>
       
+      <div className="relative mb-6">
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+        <Input
+          className="pl-10 pr-4"
+          type="text"
+          placeholder="Search models..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
+      </div>
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {models.map((model, index) => (
+        {filteredModels.map((model, index) => (
           <ModelCard
             key={index}
             title={model.title}
@@ -124,9 +163,16 @@ const Models = () => {
             requests={model.requests}
             lastUpdated={model.lastUpdated}
             isActive={model.isActive}
+            onToggleActive={() => handleToggleActive(index)}
           />
         ))}
       </div>
+      
+      {filteredModels.length === 0 && (
+        <div className="flex flex-col items-center justify-center py-8">
+          <p className="text-gray-500 text-lg">No models found matching "{searchQuery}"</p>
+        </div>
+      )}
     </Layout>
   );
 };

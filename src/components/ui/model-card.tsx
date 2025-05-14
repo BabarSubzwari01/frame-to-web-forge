@@ -11,6 +11,7 @@ interface ModelCardProps {
   requests: string;
   lastUpdated: string;
   isActive: boolean;
+  onToggleActive?: () => void;
 }
 
 const ModelCard = ({
@@ -19,7 +20,8 @@ const ModelCard = ({
   accuracy,
   requests,
   lastUpdated,
-  isActive
+  isActive,
+  onToggleActive
 }: ModelCardProps) => {
   return (
     <Card className="testbed-card">
@@ -48,7 +50,10 @@ const ModelCard = ({
         <span className="text-sm text-gray-500">Updated {lastUpdated}</span>
         <div className="flex items-center gap-2">
           <span className="text-sm">{isActive ? "On" : "Off"}</span>
-          <Switch checked={isActive} />
+          <Switch 
+            checked={isActive} 
+            onCheckedChange={onToggleActive}
+          />
         </div>
       </CardFooter>
     </Card>
